@@ -1,7 +1,10 @@
+import PropTypes from "prop-types";
 
- import PropTypes from 'prop-types';
-
-export default function Task({ task: { id, title, state }, onArchiveTask, onPinTask }) {
+export default function Task({
+  task: { id, title, state },
+  onArchiveTask,
+  onPinTask,
+}) {
   return (
     <div className={`list-item ${state}`}>
       <label
@@ -16,10 +19,7 @@ export default function Task({ task: { id, title, state }, onArchiveTask, onPinT
           id={`archiveTask-${id}`}
           checked={state === "TASK_ARCHIVED"}
         />
-        <span
-          className="checkbox-custom"
-          onClick={() => onArchiveTask(id)}
-        />
+        <span className="checkbox-custom" onClick={() => onArchiveTask(id)} />
       </label>
 
       <label htmlFor={`title-${id}`} aria-label={title} className="title">
@@ -30,8 +30,10 @@ export default function Task({ task: { id, title, state }, onArchiveTask, onPinT
           name="title"
           id={`title-${id}`}
           placeholder="Input title"
+          style={{ backgroundColor: "red" }}
         />
       </label>
+
       {state !== "TASK_ARCHIVED" && (
         <button
           className="pin-button"
@@ -46,7 +48,8 @@ export default function Task({ task: { id, title, state }, onArchiveTask, onPinT
     </div>
   );
 }
- Task.propTypes = {
+
+Task.propTypes = {
   /** Composition of the task */
   task: PropTypes.shape({
     /** Id of the task */
@@ -60,4 +63,4 @@ export default function Task({ task: { id, title, state }, onArchiveTask, onPinT
   onArchiveTask: PropTypes.func,
   /** Event to change the task to pinned */
   onPinTask: PropTypes.func,
- };
+};
